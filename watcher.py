@@ -208,14 +208,6 @@ class SW_OP_WatchScript(bpy.types.Operator):
         output = stdout.read().split('\n')
         output_err = stderr.read().split('\n')
 
-        for console in context.screen.sw_consoles:
-            if console.active and isnum(console.name):  # Make sure it's not some random string.
-
-                console, _, _ = console_python.get_console(int(console.name))
-
-                # Set the locals to the modules dict.
-                console.locals = sys.modules[self.loader.mod_name].__dict__
-
         if self.use_py_console:
             # Print the output to the consoles.
             for area in context.screen.areas:
