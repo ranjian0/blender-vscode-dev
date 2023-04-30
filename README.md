@@ -14,7 +14,7 @@ My full development workflow tools for blender using vscode
 
     > pip install debugpy
 
-2. Download the [Zip](https://github.com/ranjian0/blender-vscode-dev/archive/refs/heads/main.zip) for this addon and install in blender.
+2. Download the [zip](https://github.com/ranjian0/blender-vscode-dev/archive/refs/heads/main.zip) for this addon and install in blender.
 
 
 ## Usage
