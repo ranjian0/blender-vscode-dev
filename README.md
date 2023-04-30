@@ -19,3 +19,14 @@ My full development workflow tools for blender using vscode
 
 ## Usage
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/72jCL7aC5Zs/0.jpg)](https://www.youtube.com/watch?v=72jCL7aC5Zs)
+
+
+## References
+
+I stand on the shoulders of others
+
+
+[Blender Debugger for VSCode Addon](https://github.com/AlansCodeLog/blender-debugger-for-vscode)
+
+[Blender Script Watcher](https://github.com/wisaac407/blender-script-watcher)
