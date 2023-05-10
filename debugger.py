@@ -275,7 +275,7 @@ def check_debugger_was_detached():
         import traceback
         traceback.print_exc()
     
-    return 2 # run the timer every 5 seconds
+    return 2 # run the timer every 2 seconds
 
 classes = (
    DebuggerPreferences,
