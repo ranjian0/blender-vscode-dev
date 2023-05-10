@@ -322,7 +322,6 @@ class SW_PT_ScriptWatcherPanel(bpy.types.Panel):
         col.prop(context.scene.sw_settings, 'filepath')
         col.prop(context.scene.sw_settings, 'use_py_console')
         col.prop(context.scene.sw_settings, 'auto_watch_on_startup')
-        col.prop(context.scene.sw_settings, 'run_main')
 
         if bpy.app.version < (2, 80, 0):
             col.operator('wm.sw_watch_start', icon='VISIBLE_IPO_ON')
@@ -362,12 +361,6 @@ class ScriptWatcherSettings(bpy.types.PropertyGroup):
         name='Watch on startup',
         description='Watch script automatically on new .blend load',
         default=False
-    )
-
-    run_main = bpy.props.BoolProperty(
-        name='Run Main',
-        description='Instead of running the module with the name __main__ execute the module and call main()',
-        default=False,
     )
 
 
