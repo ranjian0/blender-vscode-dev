@@ -27,7 +27,6 @@ import types
 import subprocess
 
 import bpy
-import console_python
 from bpy.app.handlers import persistent
 
 from .utils import make_annotations
@@ -160,6 +159,7 @@ class ScriptWatcherLoader:
         # Module is a package.
         if mod == '__init__.py':
             mod = os.path.basename(dir)
+            dir = os.path.dirname(dir)
 
         # Module is a single file.
         else:
@@ -171,8 +171,11 @@ class ScriptWatcherLoader:
         """Remove all the script modules from the system cache."""
         paths = self.get_paths()
         for mod_name, mod in list(sys.modules.items()):
-            if hasattr(mod, '__file__') and mod.__file__ and os.path.dirname(mod.__file__) in paths:
-                del sys.modules[mod_name]
+            try:
+                if hasattr(mod, '__file__') and os.path.dirname(mod.__file__) in paths:
+                    del sys.modules[mod_name]
+            except TypeError:
+                pass
 
 
 # Define the script watching operator.
