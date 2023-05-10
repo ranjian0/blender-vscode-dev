@@ -292,7 +292,8 @@ def register_debugger():
 
     bpy.types.Scene.dvc_waiting_for_connection = bpy.props.BoolProperty(default=False)
     bpy.types.Scene.dvc_connected = bpy.props.BoolProperty(default=False)
-    bpy.app.timers.register(check_debugger_was_detached)
+    if not bpy.app.timers.is_registered(check_debugger_was_detached):
+        bpy.app.timers.register(check_debugger_was_detached)
 
 
 def unregister_debugger():
@@ -302,4 +303,5 @@ def unregister_debugger():
 
     del bpy.types.Scene.dvc_waiting_for_connection
     del bpy.types.Scene.dvc_connected
-    bpy.app.timers.unregister(check_debugger_was_detached)
+    if bpy.app.timers.is_registered(check_debugger_was_detached):
+        bpy.app.timers.unregister(check_debugger_was_detached)
