@@ -22,3 +22,15 @@ def update_ui_panel():
             for region in area.regions:
                 if region.type == 'UI':
                     region.tag_redraw()
+                    
+                    
+def operator_with_context(op, ctx, **kwargs):
+    """Execute an operator with a specific context"""
+
+    if bpy.app.version < (4, 0, 0):
+        op(ctx, **kwargs)
+    else:
+        context_override = bpy.context.copy()
+        context_override.update(ctx)
+        with bpy.context.temp_override(context_override):
+            op(**kwargs)

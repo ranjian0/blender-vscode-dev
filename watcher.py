@@ -30,7 +30,7 @@ import bpy
 import console_python
 from bpy.app.handlers import persistent
 
-from .utils import make_annotations
+from .utils import make_annotations, operator_with_context
 
 @persistent
 def load_handler(dummy):
@@ -38,7 +38,9 @@ def load_handler(dummy):
 
     # First of all, make sure script watcher is off on all the scenes.
     for scene in bpy.data.scenes:
-        bpy.ops.wm.sw_watch_end({'scene': scene})
+        operator_with_context(
+            bpy.ops.wm.sw_watch_end, {'scene': scene}
+        )
 
     # Startup script watcher on the current scene if needed.
     if running and bpy.context.scene.sw_settings.auto_watch_on_startup:
@@ -47,8 +49,11 @@ def load_handler(dummy):
 
 def add_scrollback(ctx, text, text_type):
     for line in text:
-        bpy.ops.console.scrollback_append(ctx, text=line.replace('\t', '    '),
-                                          type=text_type)
+        operator_with_context(
+            bpy.ops.console.scrollback_append, ctx,
+            text=line.replace('\t', '    '),
+            type=text_type
+        )
 
 
 def get_console_id(area):
@@ -197,8 +202,7 @@ class SW_OP_WatchScript(bpy.types.Operator):
             # Print the output to the consoles.
             for area in context.screen.areas:
                 if area.type == "CONSOLE":
-                    ctx = context.copy()
-                    ctx.update({"area": area})
+                    ctx = {"area": area}
 
                     # Actually print the output.
                     if output:
