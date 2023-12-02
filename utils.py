@@ -27,7 +27,7 @@ def update_ui_panel():
 def operator_with_context(op, ctx, **kwargs):
     """Execute an operator with a specific context"""
 
-    if bpy.app.version < (4, 0, 0):
+    if bpy.app.version < (3, 2, 0):
         op(ctx, **kwargs)
     else:
         context_override = bpy.context.copy()
